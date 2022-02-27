@@ -9,6 +9,7 @@ class video:
         self.channel = channel
         self.duration = duration
         self.image = image
+        self.download = False
 
 def recherche(query: str) -> list:
 

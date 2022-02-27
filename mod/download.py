@@ -1,10 +1,10 @@
 import youtube_dl
 
-def start(todo):
+def start(todo, nom):
     try:
         ydl_opts = {
             'format': 'bestaudio/best',
-            'outtmpl': '/audio/%(title)s.%(ext)s',
+            'outtmpl': f'/audio/{nom}.%(ext)s',
             'postprocessors': [
                 {
                     'key': 'FFmpegExtractAudio',
@@ -15,7 +15,7 @@ def start(todo):
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download(todo)
+            ydl.download([todo])
         return True
     except:
         return False
