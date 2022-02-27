@@ -1,2 +1,2 @@
-import mod.recherche
+import mod.recherche as recherche
 
