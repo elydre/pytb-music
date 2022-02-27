@@ -10,7 +10,7 @@ class video:
         self.duration = duration
         self.image = image
 
-def recherche(query: str) -> list(video):
+def recherche(query: str) -> list:
 
     """
     return une liste de video sur Youtube
