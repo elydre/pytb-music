@@ -1,7 +1,11 @@
-from unittest import result
+from PIL import Image
+import requests
+from io import BytesIO
 from mod.recherche import recherche
 from mod.download import start as start_download
 from _thread import start_new_thread
+from PIL import Image, ImageTk
+import pygame
 
 import tkinter as tk
 
@@ -10,6 +14,7 @@ import tkinter as tk
 global PLAYLIST, ONGLET
 PLAYLIST = []
 
+pygame.mixer.init()
 fenettre = tk.Tk()
 fenettre.title("pYtb music")
 fenettre.geometry("300x390")
@@ -17,7 +22,7 @@ fenettre.resizable(width=False, height=False)
 
 def download(video):
     print(video.link)
-    start_download(video.link, len(PLAYLIST))
+    start_download(video.link, video.link[-6:])
     video.download = True
     
 
@@ -91,8 +96,32 @@ class Playlist:
             buton[0].destroy()
         self.resultat_butons = []
 
+class Lecteur:
+    def __init__(self):
+        self.lecteur = tk.Label(fenettre, text="chargement")
+        self.lecteur.place(x=0, y=0, width=300, height=168)
+        self.lecteur.update()
+        self.pausse = tk.Button(fenettre, text="pause", command=lambda: pygame.mixer.music.pause())
+        self.pausse.place(x=0, y=168, width=300, height=30)
+        self.playbt = tk.Button(fenettre, text="play", command=lambda: pygame.mixer.music.play())
+        self.playbt.place(x=0, y=198, width=300, height=30)
+        self.play()
 
-class Lecteur: ...
+    def play(self):
+        for video in PLAYLIST:
+            if video.download:
+                global photo
+                print(video.image)
+                photo = ImageTk.PhotoImage(Image.open(BytesIO(requests.get(video.image).content)))
+                self.lecteur.configure(image=photo)
+                self.lecteur.update()
+                pygame.mixer.music.load(f'audio/{video.link[-6:]}.mp3')
+                pygame.mixer.music.play()
+        
+
+    def destroy(self, full=False):
+        self.lecteur.destroy()
+
 
 def LP(mode):
     global ONGLET
