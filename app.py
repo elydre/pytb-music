@@ -5,6 +5,9 @@ import tkinter as tk
 
 # fenettre
 
+global PLAYLIST, ONGLET
+PLAYLIST = []
+
 fenettre = tk.Tk()
 fenettre.title("pYtb music")
 fenettre.geometry("300x390")
@@ -47,15 +50,37 @@ class Recherche:
         if full:
             self.barre.destroy()
 
-def LP_recherche():
-    Recherche()
+    def add(self, video):
+        PLAYLIST.append(video)
+        print(video.title, "ajouté")
+
+class Playlist:
+    def __init__(self):
+        i = 0
+        self.resultat_butons = []
+        for video in PLAYLIST[:12]:
+            self.resultat_butons.append(tk.Button(fenettre, text=video.title, command=lambda video=video: self.add(video)))
+            self.resultat_butons[-1].place(x=0, y=i, width=300, height=30)
+            i += 30
+
+    def destroy(self, full=False):
+        for buton in self.resultat_butons:
+            buton.destroy()
+        self.resultat_butons = []
+
+
+class Lecteur: ...
+
+def LP(mode):
+    global ONGLET
+    ONGLET.destroy(True)
+    ONGLET = mode()
     
-def LP_play(): ...
 
-def LP_liste(): ...
+tk.Button(fenettre, text="recherche", command=lambda: LP(Recherche)).place(x=0, y=360, width=100, height=30)
+tk.Button(fenettre, text="play-list", command=lambda: LP(Playlist)).place(x=100, y=360, width=100, height=30)
+tk.Button(fenettre, text="lecture", command=lambda: LP(Lecteur)).place(x=200, y=360, width=100, height=30)
 
-tk.Button(fenettre, text="recherche", command=LP_recherche).place(x=0, y=360, width=100, height=30)
-tk.Button(fenettre, text="play-liste", command=LP_play).place(x=100, y=360, width=100, height=30)
-tk.Button(fenettre, text="lecture", command=LP_liste).place(x=200, y=360, width=100, height=30)
+ONGLET = Recherche()
 
 fenettre.mainloop()
