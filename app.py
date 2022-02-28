@@ -103,7 +103,7 @@ class Lecteur:
         self.lecteur.update()
         self.pausse = tk.Button(fenettre, text="pause", command=lambda: pygame.mixer.music.pause())
         self.pausse.place(x=0, y=168, width=300, height=30)
-        self.playbt = tk.Button(fenettre, text="play", command=lambda: pygame.mixer.music.play())
+        self.playbt = tk.Button(fenettre, text="play", command=lambda: pygame.mixer.music.unpause())
         self.playbt.place(x=0, y=198, width=300, height=30)
         self.play()
 
