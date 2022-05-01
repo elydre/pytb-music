@@ -21,7 +21,7 @@ def recherche(query: str) -> list:
     def ftry(e, debut, id1, fin, id2 = 0):
         try:
             return e.split(debut)[id1].split(fin)[id2]
-        except:
+        except Exception:
             return "?"
 
 

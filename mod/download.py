@@ -17,5 +17,5 @@ def start(todo, nom):
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([todo])
         return True
-    except:
+    except Exception:
         return False
