@@ -12,12 +12,12 @@ python3 app.py
 
 ### Search
 
-![img 1](https://pf4.ddns.net/doc/img/pytb1.png)
+![img 1](https://elydre.github.io/img/pytb1.png)
 
 ### Download
 
-![img 2](https://pf4.ddns.net/doc/img/pytb2.png)
+![img 2](https://elydre.github.io/img/pytb2.png)
 
 ### Playing
 
-![img 3](https://pf4.ddns.net/doc/img/pytb3.png)
+![img 3](https://elydre.github.io/img/pytb3.png)
