@@ -135,6 +135,8 @@ class Lecteur:
 
     def destroy(self, full=False):
         self.lecteur.destroy()
+        self.pausse.destroy()
+        self.playbt.destroy()
 
 
 def LP(mode):
